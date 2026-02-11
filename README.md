@@ -40,6 +40,7 @@ Low-level debugging without HAL or RTOS abstractions
 
 ## Project Structure
 embedded-firmware-stm32/
+
 ├── startup/ # Reset handler, vector table, boot sequence
 
 ├── linker/ # Custom linker scripts and memory layout
