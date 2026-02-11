@@ -41,11 +41,17 @@ Low-level debugging without HAL or RTOS abstractions
 ## Project Structure
 embedded-firmware-stm32/
 ├── startup/ # Reset handler, vector table, boot sequence
+
 ├── linker/ # Custom linker scripts and memory layout
+
 ├── interrupts/ # NVIC configuration, IRQs, fault handlers
+
 ├── scheduler/ # SysTick, PendSV, context switching
+
 ├── debugging/ # Fault analysis and crash investigation
+
 ├── peripherals/ # Register-level peripheral access
+
 └── notes/ # Architecture, ABI, and design reasoning
 
 ## Engineering Focus
