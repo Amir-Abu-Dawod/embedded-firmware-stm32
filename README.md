@@ -4,6 +4,12 @@ This repository documents hands-on exploration of bare-metal firmware developmen
 The work here is intentionally low-level: no HAL abstractions and no RTOS.
 The goal is to understand how the processor boots, handles exceptions, schedules work, and fails — and to debug those failures at the register and stack level.
 
+- [What This Repository Explores](What-This-Repository-Explores)
+- [Core Technical Areas](Core-Technical-Areas)
+- [Project Structure](Project-Structure)
+- [Engineering Focus](Engineering-Focus)
+- [Current Implementation (Bare-Metal Scheduler Demo)](Current-Implementation-(Bare-Metal-Scheduler-Demo))
+
 ## What This Repository Explores
 This project investigates core firmware mechanisms that sit below typical application frameworks:
 
