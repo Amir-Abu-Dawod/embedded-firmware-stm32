@@ -4,28 +4,31 @@ This repository documents hands-on exploration of bare-metal firmware developmen
 The work here is intentionally low-level: no HAL abstractions and no RTOS.
 The goal is to understand how the processor boots, handles exceptions, schedules work, and fails — and to debug those failures at the register and stack level.
 
-- [What This Repository Explores](What-This-Repository-Explores)
-- [Core Technical Areas](Core-Technical-Areas)
-- [Project Structure](Project-Structure)
-- [Engineering Focus](Engineering-Focus)
-- [Current Implementation (Bare-Metal Scheduler Demo)](Current-Implementation-(Bare-Metal-Scheduler-Demo))
+- [Target Platform](#target-platform)
+- [What This Repository Explores](#what-this-repository-explores)
+- [Core Technical Areas](#core-technical-areas)
+- [Project Structure](#project-structure)
+- [Engineering Focus](#engineering-focus)
+- [Current Implementation (Bare-Metal Scheduler Demo)](#current-implementation-bare-metal-scheduler-demo)
+
+## Target Platform
+
+- Board: STM32F407G-DISC1 (STM32F4 Discovery)
+- MCU: STM32F407VG (ARM Cortex-M4)
+- Clock Source: HSI (16 MHz)
+- Debug Interface: JTAG / SWD
+
+This project targets the STM32F4 Discovery board for all bring-up and experiments.
 
 ## What This Repository Explores
-This project investigates core firmware mechanisms that sit below typical application frameworks:
 
-MCU reset-to-main boot flow, including vector tables and startup code
-
-Exception and interrupt handling, NVIC configuration, and priority/preemption behavior
-
-Exception entry/exit and stack frame analysis during interrupts and faults
-
-Preemptive scheduling using SysTick and PendSV, including manual context switching
-
-Processor fault handling (HardFault, MemManage, BusFault, UsageFault) and crash diagnosis
-
-Linker-driven memory layout, stack/heap placement, and ELF analysis
-
-Register-level debugging via JTAG/SWD using OpenOCD and GDB
+- MCU reset-to-main boot flow, including vector tables and startup code
+- Exception and interrupt handling, NVIC configuration, and priority/preemption behavior
+- Exception entry/exit and stack frame analysis during interrupts and faults
+- Preemptive scheduling using SysTick and PendSV, including manual context switching
+- Processor fault handling (HardFault, MemManage, BusFault, UsageFault) and crash diagnosis
+- Linker-driven memory layout, stack/heap placement, and ELF analysis
+- Register-level debugging via JTAG/SWD using OpenOCD and GDB
 
 ## Core Technical Areas
 Bare-metal firmware in C and inline assembly
