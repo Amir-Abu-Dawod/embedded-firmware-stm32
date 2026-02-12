@@ -66,3 +66,13 @@ Treat firmware as a system, not isolated functions
 
 Prioritize understanding over convenience
 
+## Current Implementation (Bare-Metal Scheduler Demo)
+
+This repository currently includes a working bare-metal demo featuring:
+
+- Custom startup code and vector table (`startup/`)
+- Custom linker script with SRAM/FLASH layout and `.data` relocation (`linker/`)
+- Preemptive scheduler using SysTick + PendSV with manual context switching (`scheduler/`)
+- Register-level GPIO control for task-visible output (LED toggling) (`peripherals/`)
+- Minimal newlib syscall stubs / semihosting hooks for bring-up printing (`syscalls.c`)
+- GCC-based build pipeline and OpenOCD workflow (`Makefile`)
