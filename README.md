@@ -10,6 +10,7 @@ The goal is to understand how the processor boots, handles exceptions, schedules
 - [Project Structure](#project-structure)
 - [Engineering Focus](#engineering-focus)
 - [Current Implementation (Bare-Metal Scheduler Demo)](#current-implementation-bare-metal-scheduler-demo)
+- [Build & Flash Workflow](#build--flash-workflow)
 
 ## Target Platform
 
@@ -85,3 +86,39 @@ This repository currently includes a working bare-metal demo featuring:
 - Register-level GPIO control for task-visible output (LED toggling) (`peripherals/`)
 - Minimal newlib syscall stubs / semihosting hooks for bring-up printing (`syscalls.c`)
 - GCC-based build pipeline and OpenOCD workflow (`Makefile`)
+
+## Build & Flash Workflow
+
+
+### Option 1 — OpenOCD + Telnet (Semihosting)
+
+```
+make semi          # Build with semihosting support
+make load          # Start OpenOCD server
+```
+  
+In a new terminal (Telnet to OpenOCD port 4444):
+```
+reset init
+flash write_image erase final_sh.elf
+reset halt
+resume
+```
+
+### Option 2 — OpenOCD + GDB
+
+Terminal 1:
+```
+make               # Build firmware
+make load          # Start OpenOCD server
+```
+
+Terminal 2:
+```
+arm-none-eabi-gdb final.elf
+target remote localhost:3333
+monitor reset init
+monitor flash write_image erase final.elf
+monitor reset halt
+monitor resume
+```
