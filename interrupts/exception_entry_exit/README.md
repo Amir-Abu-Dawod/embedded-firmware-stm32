@@ -12,7 +12,7 @@ Goal: observe Cortex-M exception entry/exit behavior and verify the Thread→Han
 - NVIC interrupt enable (ISER)
 - Software-triggered interrupts (STIR)
 - Exception entry/exit flow on Cortex-M
-- (Optional) PSP vs MSP behavior by setting CONTROL.SPSEL and PSP
+- PSP vs MSP behavior by setting CONTROL.SPSEL and PSP
 
 ## Notes
 This folder is intended to be inspected under a debugger to observe:
