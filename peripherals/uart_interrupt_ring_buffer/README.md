@@ -2,13 +2,13 @@ Interrupt-driven UART communication using STM32 HAL for USART handling and a cus
 
 Project: Interrupt-driven UART RX ring buffer on STM32F407G-DISC1
 
-Board: STM32F407G-DISC1
-Peripheral: USART2
-Pins:
-PA2 = USART2_TX
-PA3 = USART2_RX
-Baud rate: 115200
-Format: 8N1, no flow control
+-Board: STM32F407G-DISC1
+-Peripheral: USART2
+-Pins:
+-PA2 = USART2_TX
+-PA3 = USART2_RX
+-Baud rate: 115200
+-Format: 8N1, no flow control
 
 Hardware used:
 CP210x USB-UART adapter
