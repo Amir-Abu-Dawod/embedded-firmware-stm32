@@ -1,7 +1,7 @@
 ## Embedded Firmware Experiments on ARM Cortex-M (STM32)
 This repository documents hands-on exploration of bare-metal firmware development on ARM Cortex-M3/M4 microcontrollers (STM32), with a strong focus on startup, interrupts, scheduling, and fault analysis.
 
-The work here is intentionally low-level: no HAL abstractions and no RTOS.
+The core startup, scheduling, interrupt, and fault-handling experiments are intentionally low-level, with no RTOS and minimal vendor abstraction. Peripheral validation demos may use STM32 HAL for bring-up while focusing on custom buffering, interrupt flow, and hardware verification.
 The goal is to understand how the processor boots, handles exceptions, schedules work, and fails — and to debug those failures at the register and stack level.
 
 - [Target Platform](#target-platform)
@@ -10,6 +10,7 @@ The goal is to understand how the processor boots, handles exceptions, schedules
 - [Project Structure](#project-structure)
 - [Engineering Focus](#engineering-focus)
 - [Current Implementation (Bare-Metal Scheduler Demo)](#current-implementation-bare-metal-scheduler-demo)
+- [Hardware-Verified UART Demo](#hardware-verified-uart-demo)
 - [Build & Flash Workflow](#build--flash-workflow)
 
 ## Target Platform
@@ -30,6 +31,7 @@ This project targets the STM32F4 Discovery board for all bring-up and experiment
 - Processor fault handling (HardFault, MemManage, BusFault, UsageFault) and crash diagnosis
 - Linker-driven memory layout, stack/heap placement, and ELF analysis
 - Register-level debugging via JTAG/SWD using OpenOCD and GDB
+- Hardware-verified UART communication using RX interrupts, a custom ring buffer, USB-UART adapter, and PulseView logic analyzer decoding
 
 ## Core Technical Areas
 Bare-metal firmware in C and inline assembly
@@ -61,7 +63,7 @@ embedded-firmware-stm32/
 
 ├── debugging/ # Fault analysis and crash investigation
 
-├── peripherals/ # Register-level peripheral access
+├── peripherals/ # Peripheral demos, UART ring buffer, and hardware validation
 
 └── notes/ # Architecture, ABI, and design reasoning
 
@@ -86,6 +88,16 @@ This repository currently includes a working bare-metal demo featuring:
 - Register-level GPIO control for task-visible output (LED toggling) (`peripherals/`)
 - Minimal newlib syscall stubs / semihosting hooks for bring-up printing (`syscalls.c`)
 - GCC-based build pipeline and OpenOCD workflow (`Makefile`)
+
+## Hardware-Verified UART Demo
+
+The repository also includes a hardware-verified UART communication demo:
+
+* [`peripherals/uart_interrupt_ring_buffer`](peripherals/uart_interrupt_ring_buffer) — USART2 echo demo using interrupt-driven RX, a custom C ring buffer, USB-UART communication, and PulseView logic analyzer validation.
+* RX path: PC/PuTTY → USB-UART → STM32 USART2 RX interrupt → ring buffer.
+* TX path: main loop pops bytes from the ring buffer and echoes them back through USART2 TX.
+* Hardware verification includes a CP210x USB-UART adapter, 8-channel logic analyzer, PulseView UART decoding, and captured RX/TX waveforms.
+
 
 ## Build & Flash Workflow
 
