@@ -22,3 +22,9 @@ Project Flow:
   HAL_UART_RxCpltCallback pushes the byte into a fixed-size ring buffer.
   Main loop pops bytes from the ring buffer and transmits them back.
   Logic analyzer captures both RX and TX UART lines and PulseView decodes the echoed data.
+
+| Signal | Logic Analyzer Channel | STM32 Pin | Direction |
+|---|---|---|---|
+| UART TX | D0 / CH1 | PA2 / USART2_TX | STM32 → PC |
+| UART RX | D1 / CH2 | PA3 / USART2_RX | PC → STM32 |
+| GND | GND | GND | Common ground |
